@@ -16,3 +16,20 @@ def insert_sort(elements):
         elements[position] = insert
         print(insert, position, elements)
     return elements
+
+
+def select_sort(elements):
+    """
+    Use the simple selection sort algorithm to sort the :param elements.
+    :param elements: must be a sequence which has the function __get_item__ and __len__.
+    :return: the sorted elements in increasing order
+    """
+    if not len(elements) or len(elements) == 1:
+        return elements
+    for sorted_count in range(0, len(elements)-1):
+        min_index = sorted_count
+        for index in range(sorted_count, len(elements)):
+            if elements[index] < elements[min_index]:
+                min_index = index
+        elements[sorted_count], elements[min_index] = elements[min_index], elements[sorted_count]
+    return elements
