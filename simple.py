@@ -14,7 +14,6 @@ def insert_sort(elements):
         for i in range(index, position, -1):
             elements[i] = elements[i-1]
         elements[position] = insert
-        print(insert, position, elements)
     return elements
 
 
