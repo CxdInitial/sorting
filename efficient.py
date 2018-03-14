@@ -34,6 +34,3 @@ def heap_sort(elements):
                 elements[parent], elements[min_index] = elements[min_index], elements[parent]
             origin_parent -= 1
     return elements
-
-
-print(heap_sort([1, 4, 3, 2, 9, 8, 7, 1, 0, 23, 3456, 12, 100]))
