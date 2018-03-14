@@ -1,7 +1,7 @@
 def insert_sort(elements):
     """
     Use the simple insertion sort algorithm to sort the :param elements.
-    :param elements: must be a sequence which has the function __get_item__ and __len__.
+    :param elements: a sequence in which the function __get_item__ and __len__ were implemented
     :return: the sorted elements in increasing order
     """
     if not len(elements) or len(elements) == 1:
@@ -20,7 +20,7 @@ def insert_sort(elements):
 def select_sort(elements):
     """
     Use the simple selection sort algorithm to sort the :param elements.
-    :param elements: must be a sequence which has the function __get_item__ and __len__.
+    :param elements: a sequence in which the function __get_item__ and __len__ were implemented
     :return: the sorted elements in increasing order
     """
     if not len(elements) or len(elements) == 1:
