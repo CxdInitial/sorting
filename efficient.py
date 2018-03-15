@@ -39,7 +39,8 @@ def heap_sort(elements):
 def merge_sort(elements):
     """
     Use the simple merge sort algorithm to sort the :param elements.
-    :param elements: a sequence in which the function __get_item__ and __len__ were implemented
+    :param elements: a sequence in which the function __get_item__ and __len__ were implemented,
+    as well as the slice and add operations.
     :return: the sorted elements in increasing order
     """
     length = len(elements)
@@ -50,10 +51,10 @@ def merge_sort(elements):
         index = 0
         while length - index >= volume:
             tmp = []
-            i, j, limit = index, index+volume/2, index + volume
+            i, j, limit = index, index + volume / 2, index + volume
             mid_limit = j
             while i < mid_limit and j < limit:
-                if elements[j]<elements[i]:
+                if elements[j] < elements[i]:
                     tmp.append(elements[j])
                     j += 1
                 else:
@@ -66,12 +67,12 @@ def merge_sort(elements):
             for value in tmp:
                 elements[index] = value
                 index += 1
-        if length - index > volume/2:
+        if length - index > volume / 2:
             tmp = []
-            i, j = index, index+volume/2
+            i, j = index, index + volume / 2
             mid_limit = j
             while i < mid_limit and j < length:
-                if elements[j]<elements[i]:
+                if elements[j] < elements[i]:
                     tmp.append(elements[j])
                     j += 1
                 else:
@@ -85,4 +86,40 @@ def merge_sort(elements):
                 elements[index] = value
                 index += 1
         volume *= 2
+    return elements
+
+
+def quick_sort(elements):
+    """
+    Use the simple non-recursive quick sort algorithm to sort the :param elements.
+    :param elements: a sequence in which the function __get_item__, __len__ and insert were implemented
+    :return: the sorted elements in increasing order
+    """
+    length = len(elements)
+    if not length or length == 1:
+        return elements
+    stack, limit = [], [0, length - 1]
+    while stack or limit[1] - limit[0] > 0:
+        while limit[1] - limit[0] > 0:
+            i, j, tail = limit[0], limit[1] - 1, limit[1]
+            if tail - i == 1:
+                if elements[tail] > elements[i]:
+                    i = tail
+            else:
+                while i < j:
+                    while j > limit[0] - 1 and elements[j] >= elements[tail]:
+                        j -= 1
+                    while i < tail and elements[i] <= elements[tail]:
+                        i += 1
+                    if i < j:
+                        elements[i], elements[j] = elements[j], elements[i]
+                        i += 1
+                        j -= 1
+            elements[i], elements[tail] = elements[tail], elements[i]
+            limit.append(i)
+            stack.append(limit)
+            limit = [limit[0], limit[2] - 1]
+        if stack:
+            top = stack.pop()
+            limit = [top[2] + 1, top[1]]
     return elements
