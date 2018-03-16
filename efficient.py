@@ -107,14 +107,19 @@ def quick_sort(elements):
                     i = tail
             else:
                 while i < j:
-                    while j > limit[0] - 1 and elements[j] >= elements[tail]:
-                        j -= 1
-                    while i < tail and elements[i] <= elements[tail]:
+                    while i < j and elements[i] <= elements[tail]:
                         i += 1
+                    while j > i and elements[j] >= elements[tail]:
+                        j -= 1
                     if i < j:
                         elements[i], elements[j] = elements[j], elements[i]
                         i += 1
                         j -= 1
+            if i == j:
+                if elements[i] < elements[tail]:
+                    i += 1
+                elif elements[i] > elements[tail]:
+                    i = j
             elements[i], elements[tail] = elements[tail], elements[i]
             limit.append(i)
             stack.append(limit)
