@@ -51,3 +51,31 @@ def shell_sort(elements):
                 elements[i] = insert
             index += gap
     return elements
+
+
+def comb_sort(elements):
+    """
+    Use the simple comb sort algorithm to sort the :param elements.
+    :param elements: a sequence in which the function __get_item__ and __len__ were implemented
+    :return: the sorted elements in increasing order
+    """
+    length = len(elements)
+    if not length or length == 1:
+        return elements
+    copy = length - 1
+    steps = []
+    while copy > 1:
+        if copy == 9 or copy == 10:
+            copy = 11
+        else:
+            steps.append(copy)
+        copy = int(copy / 1.3)
+    steps.append(1)
+    for step in range(len(steps)):
+        step = steps[step]
+        i = 0
+        while i + step < length:
+            if elements[i] > elements[i + step]:
+                elements[i], elements[i + step] = elements[i + step], elements[i]
+            i += step
+    return elements
