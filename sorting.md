@@ -112,17 +112,47 @@
 
 ##### 归并排序
 
-
+归并操作（merge），也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。
 
 ##### 快速排序
 
+快速排序（英语：Quicksort），又称**划分交换排序**（partition-exchange sort），简称[快排](https://zh.wikipedia.org/wiki/%E5%BF%AB%E6%8E%92)，一种[排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)，最早由[东尼·霍尔](https://zh.wikipedia.org/wiki/%E6%9D%B1%E5%B0%BC%C2%B7%E9%9C%8D%E7%88%BE)提出。在平均状况下，排序{\displaystyle n}![n](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)个项目要![{\displaystyle \Theta (n\log n)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/1b8781cea4259c3bd43204e02d08b9b9ce8fe0ff)（[大O符号](https://zh.wikipedia.org/wiki/%E5%A4%A7O%E7%AC%A6%E5%8F%B7)）次比较。在最坏状况下则需要![{\displaystyle \Theta (n^{2})}](https://wikimedia.org/api/rest_v1/media/math/render/svg/215877752c4f392a7276328d4d37709bf7c3f55d)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他![{\displaystyle \Theta (n\log n)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/1b8781cea4259c3bd43204e02d08b9b9ce8fe0ff)算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地达成。
+
 #### 冒泡排序及其变种
+
+冒泡排序及其变种（如：鸡尾酒排序）都是很简单但非常低效率的排序算法。
 
 ##### 冒泡排序
 
+冒泡算法可以用于小型的数据排序，小到渐进的低效性不会被着重考量。
+
+又或者，可以将冒泡算法应用于几乎有序的列表中，这时排序算法的时间复杂度为$$O(n)$$级别的。
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Bubblesort-edited-color.svg/512px-Bubblesort-edited-color.svg.png)
+
 ##### 希尔排序
 
-##### 梳排序
+希尔排序是对插入排序的改进。插入算法的时间复杂度为$$O(kn)$$，$$n$$是列表的长度，而$$k$$是两个脱离位置（有序时的位置）的元素的距离。所以，当列表已经几乎有序时，插入排序可以非常快。因此，第一步不去对远隔的元素进行排序，而是逐渐的讲元素之间的距离缩短，来让最终的排序变得异常迅速。
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Shell_sorting_algorithm_color_bars.svg/512px-Shell_sorting_algorithm_color_bars.svg.png)
+
+希尔排序的时间复杂度是个开放性的问题，取决于元素的间隔的选取，广为人知的有$$O(n^2)$$、$$O(n^{4/3})$$和$$O(nlog_2)$$。希尔排序是原地算法，而且仅需要相对较少的代码，并且不需要使用调用栈，使得它在嵌入式系统和操作系统内核中十分重要。
+
+#####  梳排序
+
+梳排序（Comb sort）是一种由[Wlodzimierz Dobosiewicz](https://en.wikipedia.org/wiki/Wlodzimierz_Dobosiewicz)于1980年所发明的不稳定[排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)，并由[Stephen Lacey](https://en.wikipedia.org/wiki/Stephen_Lacey)和[Richard Box](https://en.wikipedia.org/wiki/Richard_Box)于1991年四月号的[Byte杂志](https://en.wikipedia.org/wiki/Byte_Magazine)中推广。梳排序是改良自[泡沫排序](https://zh.wikipedia.org/wiki/%E6%B3%A1%E6%B2%AB%E6%8E%92%E5%BA%8F)和[快速排序](https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)，其要旨在于消除*乌龟*，亦即在阵列尾部的小数值，这些数值是造成泡沫排序缓慢的主因。相对地，*兔子*，亦即在阵列前端的大数值，不影响泡沫排序的效能。
+
+在泡沫排序中，只比较阵列中相邻的二项，即比较的二项的*间距（Gap）*是1，梳排序提出此间距其实可大于1，改自[插入排序](https://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F)的[希尔排序](https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F)同样提出相同观点。梳排序中，开始时的间距设定为阵列长度，并在循环中以固定比率递减，通常*递减率*设定为1.3。在一次循环中，梳排序如同泡沫排序一样把阵列从首到尾扫描一次，比较及交换两项，不同的是两项的间距不固定于1。如果间距递减至1，梳排序假定输入阵列大致排序好，并以泡沫排序作最后检查及修正。
+
+###### 递减率
+
+递减率的设定影响着梳排序的效率，原作者以随机数作实验，得到最有效递减率为1.3的。如果此比率太小，则导致一循环中有过多的比较，如果比率太大，则未能有效消除阵列中的乌龟。
+
+亦有人提议用![{\displaystyle 1/\left(1-{\frac {1}{e^{\varphi }}}\right)\approx 1.247330950103979}](https://wikimedia.org/api/rest_v1/media/math/render/svg/5a690af8744dedfc8e5c7c5031c6b4cac1ad68a3)作递减率，同时增加换算表协助于每一循环开始时计算新间距。
+
+因为编程语言中乘法比除法快，故会取递减率倒数与间距相乘，![{\displaystyle {\frac {1}{1.247330950103979}}=0.801711847137793\approx 0.8}](https://wikimedia.org/api/rest_v1/media/math/render/svg/cf95dfe8165efadd4f406a92b6874f423f9a84c4)
+
+设定递减率为1.3时，最后只会有三种不同的间距组合：(9, 6, 4, 3, 2, 1)、(10, 7, 5, 3, 2, 1)、或 (11, 8, 6, 4, 3, 2, 1)。实验证明，如果间距变成9或10时一律改作11，则对效率有明显改善，原因是如果间距曾经是9或10，则到间距变成1时，数值通常不是递增序列，故此要进行几次泡沫排序循环修正。加入此指定间距的变异形式称为*梳排序-11(Combsort11)*。
 
 #### 分发排序
 
