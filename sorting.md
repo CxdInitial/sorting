@@ -156,15 +156,38 @@
 
 #### 分发排序
 
+分发排序算法（又叫：外部排序）指的是，将输入的数据分为多个中间结构，最终将它们聚集起来输出的排序算法。例如：[桶排序](https://en.wikipedia.org/wiki/Bucket_sort)和[闪电排序](https://en.wikipedia.org/wiki/Flashsort)。
+
+分发排序可以用于单个处理器上，又或者作为一个分布式算法，这使得外部排序可以将大量数据分配给多个电脑的内存中。
+
 ##### 计数排序
+
+当输入的元素是![n](https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b)个![{\displaystyle  0 }](https://wikimedia.org/api/rest_v1/media/math/render/svg/2aae8864a3c1fec9585261791a809ddec1489950)到 ![ k ](https://wikimedia.org/api/rest_v1/media/math/render/svg/c3c9a2c7b599b37105512c5d570edc034056dd40)之间的整数时，它的运行时间是  ![{\displaystyle \Theta (n+k)}](https://wikimedia.org/api/rest_v1/media/math/render/svg/9048502a7c90cb3c2896b72bbebca46233a02408)。计数排序不是[比较排序](https://zh.wikipedia.org/wiki/%E6%AF%94%E8%BE%83%E6%8E%92%E5%BA%8F)，排序的速度快于任何比较排序算法。
+
+由于用来计数的数组![ C ](https://wikimedia.org/api/rest_v1/media/math/render/svg/4fc55753007cd3c18576f7933f6f089196732029)的长度取决于待排序数组中数据的范围（等于待排序数组的最大值与最小值的差加上1），这使得计数排序对于数据范围很大的数组，需要大量时间和内存。例如：计数排序是用来排序0到100之间的数字的最好的算法，但是它不适合按字母顺序排序人名。但是，计数排序可以用在[基数排序](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F)算法中，能够更有效的排序数据范围很大的数组。
 
 ##### 筒排序
 
+> 引用自：[博客](http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%884%EF%BC%89-%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88bucket-sort%EF%BC%89.html)
+
+桶排序假设待排序的一组数统一的分布在一个范围中，并将这一范围划分成几个 子范围，也就是桶。
+将待排序的一组数，分档规入这些子桶。并将桶中的数据进行排序。
+将各个桶中的数据有序的合并起来。
+
+计数排序是桶排序的一种特化（筒的大小为1）。
+
+![](http://www.roading.org/images/2011-10/wps_clip_image-21187_thumb.png)
+
 ##### 基数排序
 
+In [computer science](https://en.wikipedia.org/wiki/Computer_science), **radix sort** is a non-[comparative](https://en.wikipedia.org/wiki/Comparison_sort) [integer](https://en.wikipedia.org/wiki/Integer_sorting) [sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm) that sorts data with integer keys by grouping keys by the individual digits which share the same [significant](https://en.wikipedia.org/wiki/Significant_figures) position and value. A [positional notation](https://en.wikipedia.org/wiki/Positional_notation) is required, but because integers can represent strings of characters (e.g., names or dates) and specially formatted floating point numbers, [radix](https://en.wikipedia.org/wiki/Radix) sort is not limited to integers. Radix sort dates back as far as 1887 to the work of [Herman Hollerith](https://en.wikipedia.org/wiki/Herman_Hollerith) on [tabulating machines](https://en.wikipedia.org/wiki/Tabulating_machines).[[1\]](https://en.wikipedia.org/wiki/Radix_sort#cite_note-1)
 
+Two classifications of radix sorts are [least significant digit](https://en.wikipedia.org/wiki/Least_significant_digit) (LSD) radix sorts and [most significant digit](https://en.wikipedia.org/wiki/Most_significant_digit)
+ (MSD) radix sorts. LSD radix sorts process the integer representations starting from the least digit and move towards the most significant digit. MSD radix sorts work the other way around.
 
+> 图片引用自：[博客](http://www.roading.org/algorithm/introductiontoalgorithm/%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%884%EF%BC%89-%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%88bucket-sort%EF%BC%89.html)
 
+![](http://www.roading.org/images/2011-10/wps_clip_image-1844_thumb.png)
 
 [^内省排序]: introspective内省的 
 
