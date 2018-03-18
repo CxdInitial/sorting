@@ -67,3 +67,35 @@ def bucket_sort(elements, bucket_size=10):
             length += 1
             ptr = ptr[1]
     return elements
+
+
+def radix_sort(elements):
+    """
+    Use the simple radix sort algorithm to sort the :param elements.
+    :param bucket_size: the distribution buckets' size
+    :param elements: a integer sequence in which the function __get_item__ and __len__ were implemented()
+    :return: the sorted elements in increasing order
+    """
+    length = len(elements)
+    if not length or length == 1:
+        return elements
+    maxi = elements[0]
+    for element in elements:
+        assert isinstance(element, int)
+        if element > maxi:
+            maxi = element
+    bits = 0
+    while maxi > 0:
+        maxi //= 10
+        bits += 1
+    all_range = [[], [], [], [], [], [], [], [], [], []]
+    for i in range(2):
+        for element in elements:
+            num = (element // (10 ** i)) % 10
+            all_range[num].append(element)
+        length = 0
+        for items in all_range:
+            while items:
+                elements[length] = items.pop(0)
+                length += 1
+    return elements
