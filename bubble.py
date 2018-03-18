@@ -67,15 +67,23 @@ def comb_sort(elements):
     while copy > 1:
         if copy == 9 or copy == 10:
             copy = 11
-        else:
-            steps.append(copy)
+        steps.append(copy)
         copy = int(copy / 1.3)
     steps.append(1)
+    if length == 10 or length == 11:
+        steps = steps[1:]
     for step in range(len(steps)):
         step = steps[step]
-        i = 0
-        while i + step < length:
-            if elements[i] > elements[i + step]:
-                elements[i], elements[i + step] = elements[i + step], elements[i]
-            i += step
+        if step > length / 2:
+            if elements[0] > elements[0 + step]:
+                elements[0], elements[0 + step] = elements[0 + step], elements[0]
+        else:
+            limit = length
+            while limit > step:
+                i = 0
+                while i + step < limit:
+                    if elements[i] > elements[i + step]:
+                        elements[i], elements[i + step] = elements[i + step], elements[i]
+                    i += step
+                limit -= step
     return elements
